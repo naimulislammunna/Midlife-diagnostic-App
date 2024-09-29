@@ -84,7 +84,7 @@ const Register = () => {
                     <input type="submit" value='Submit' className="w- rounded-md bg-cyan-700 px-4 py-2 text-white transition-colors hover:bg-cyan-900 dark:bg-cyan-700 cursor-pointer" />
                 </form>
                 <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
-                    Don&apos;t have an account?
+                    I have an account?
                     <Link to='/sign-in'>
                         <a className="ml-3 font-semibold underline">
                             Sign In
