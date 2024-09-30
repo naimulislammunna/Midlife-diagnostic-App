@@ -1,12 +1,25 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Auth/AuthProvider";
+import { useForm } from "react-hook-form";
 
 const SignIn = () => {
+    const {handleSignIn} = useContext(AuthContext);
+    const {register, handleSubmit} = useForm();
+    
+    const onSubmit = (data) => {
+        const {email, password} = data;
+        handleSignIn(email, password)
+        .then(res => console.log(res)
+        )
+
+    }
     return (
         <div className="my-5">
             <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
                 <h1 className="text-3xl font-semibold text-cyan-600">Sign In</h1>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="username_2" className="block font-medium">
                             Email
@@ -18,6 +31,7 @@ const SignIn = () => {
                             name="email"
                             type="email"
                             required
+                            {...register('email')}
                         />
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
@@ -31,6 +45,7 @@ const SignIn = () => {
                             name="password"
                             type="password"
                             required
+                            {...register('password')}
                         />
                     </div>
                     <input type="submit" value='Submit' className="w- rounded-md bg-cyan-700 px-4 py-2 text-white transition-colors hover:bg-cyan-900 dark:bg-cyan-700 cursor-pointer" />
@@ -48,8 +63,6 @@ const SignIn = () => {
                     <div className="mx-4 text-gray-400">OR</div>
                     <hr className="flex-1 border-gray-400" />
                 </div>
-                {/* Social icons */}
-                {/* <GoogleLogIn></GoogleLogIn> */}
             </div>
         </div>
     );

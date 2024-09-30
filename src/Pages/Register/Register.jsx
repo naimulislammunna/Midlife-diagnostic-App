@@ -1,32 +1,47 @@
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../../Auth/AuthProvider";
 import { useForm } from "react-hook-form";
-// import { toast, ToastContainer } from "react-toastify";
-// import 'react-toastify/dist/ReactToastify.css';
-// import { AuthContext } from "../../Auth/AuthProvider";
-// import useAxiosPublic from "../../Hook/useAxiosPublic";
-// import Swal from "sweetalert2";
-// import GoogleLogIn from "../../Components/GoogleLogIn/GoogleLogIn";
+import { AuthContext } from "../../Auth/AuthProvider";
 
 const Register = () => {
-    // const {handleRegister} = useContext(AuthContext);
+    const { handleRegister } = useContext(AuthContext);
+    const [districts, setDistricts] = useState([]);
+    const [upozilas, setUpozilas] = useState([]);
+    const [formData, setFormData] = useState([]);
+    const bloods = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
+
+    useEffect(() => {
+        fetch('../../../public/Districts.json')
+            .then(res => res.json())
+            .then(data => setDistricts(data))
+    }, [])
+    useEffect(() => {
+        fetch('../../../public/Upazila.json')
+            .then(res => res.json())
+            .then(data => setUpozilas(data))
+    }, [])
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
-      } = useForm()
-    
-      const onSubmit = (data) => console.log(data)
+    } = useForm()
+
+
+    const onSubmit = (data) => {
+        handleRegister(data.email, data.password)
+            .then(res => console.log(res)
+            )
+        setFormData(data)
+    }
+
 
     return (
         <div className="my-5">
-            <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
+            <div className="mx-auto w-full max-w-3xl space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
                 <h1 className="text-3xl font-semibold text-cyan-600">Register</h1>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
+                    <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300 mt-5">
                         <label htmlFor="username_2" className="block font-medium">
                             Name
                         </label>
@@ -69,6 +84,36 @@ const Register = () => {
                         />
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
+                        <label htmlFor="email" className="block font-medium">
+                            Blood Group
+                        </label>
+                        <select className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700" name="" id="" {...register('blood')}>
+                            {
+                                bloods?.map(blood => <option key={blood.id} value={blood}>{blood}</option>)
+                            }
+                        </select>
+                    </div>
+                    <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
+                        <label htmlFor="email" className="block font-medium">
+                            Select Districts
+                        </label>
+                        <select className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700" name="" id="" {...register('district')}>
+                            {
+                                districts?.map(district => <option key={district.id} value={district?.name}>{district?.name}</option>)
+                            }
+                        </select>
+                    </div>
+                    <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
+                        <label htmlFor="email" className="block font-medium">
+                            Select Upozila
+                        </label>
+                        <select className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700" name="" id="" {...register('upozila')}>
+                            {
+                                upozilas?.map(upozila => <option key={upozila.id} value={upozila?.name}>{upozila?.name}</option>)
+                            }
+                        </select>
+                    </div>
+                    <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="password_2" className="block font-medium">
                             Password
                         </label>
@@ -79,6 +124,21 @@ const Register = () => {
                             name="password"
                             type="password"
                             required
+                            {...register('password')}
+                        />
+                    </div>
+                    <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
+                        <label htmlFor="password_2" className="block font-medium">
+                            Confirm Password
+                        </label>
+                        <input
+                            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700"
+                            id="password_2"
+                            placeholder="Enter password"
+                            name="confirm-password"
+                            type="password"
+                            required
+                            {...register('confirm-password')}
                         />
                     </div>
                     <input type="submit" value='Submit' className="w- rounded-md bg-cyan-700 px-4 py-2 text-white transition-colors hover:bg-cyan-900 dark:bg-cyan-700 cursor-pointer" />

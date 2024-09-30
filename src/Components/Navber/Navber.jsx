@@ -1,15 +1,14 @@
-
-// import { useContext } from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import { AuthContext } from "../../Auth/AuthProvider";
+import { AuthContext } from "../../Auth/AuthProvider";
 
 
 const Navber = () => {
-    // const { userInfo, logOut } = useContext(AuthContext);
+    const { logOut } = useContext(AuthContext);
 
-    // const handleLogOut = () => {
-    //     logOut();
-    // }
+    const handleLogOut = () => {
+        logOut();
+    }
 
 
     const items = <>
@@ -81,6 +80,7 @@ const Navber = () => {
                             <li>{userInfo && <button onClick={handleLogOut} className="px-4 py-2 rounded-full bg-white">Sign Out</button>}</li>
                         </ul>
                     </div>} */}
+                    <button onClick={handleLogOut} className="button">Sign Out</button>
                 </div>
             </div>
 
