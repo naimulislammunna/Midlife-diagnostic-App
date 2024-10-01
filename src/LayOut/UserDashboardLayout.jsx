@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Pages/UserDashboard.jsx/Sidebar";
 
-const userDashboard = () => {
+const UserDashboardLayout = () => {
     return (
         <>
             <div className="flex flex-col sm:flex-row">
@@ -14,4 +14,4 @@ const userDashboard = () => {
     );
 };
 
-export default userDashboard;
+export default UserDashboardLayout;
