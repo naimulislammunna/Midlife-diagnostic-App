@@ -3,13 +3,17 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Auth/AuthProvider";
+import axios from "axios";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
     const { handleRegister } = useContext(AuthContext);
     const [districts, setDistricts] = useState([]);
     const [upozilas, setUpozilas] = useState([]);
     const [formData, setFormData] = useState([]);
-    const bloods = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
+    const bloods = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+    const imgKey = import.meta.env.VITE_imgBB_key;
+    const axiosPublic = useAxiosPublic()
 
     useEffect(() => {
         fetch('../../../public/Districts.json')
@@ -28,13 +32,33 @@ const Register = () => {
     } = useForm()
 
 
-    const onSubmit = (data) => {
-        handleRegister(data.email, data.password)
-            .then(res => console.log(res)
-            )
-        setFormData(data)
-    }
+    const onSubmit = async (data) => {
+        const { name, email, password, confirmPassword, blood, district, upozila } = data;
+        if(password === confirmPassword){
+            handleRegister(email, password)
+            .then(res => console.log(res))
+        }
+        const photo = { image: data.photo[0] }
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${imgKey}`, photo, {
+            headers: {
+                "content-type": "multipart/form-data"
+            }
+        })
+        const user = {
+            name,
+            email,
+            blood,
+            district,
+            upozila,
+            photo: response.data.data.display_url,
+            status: 'active'
+        }
 
+        const res = axiosPublic.post('/users', user);
+        console.log("server res", res);
+
+
+    }
 
     return (
         <div className="my-5">
@@ -57,16 +81,16 @@ const Register = () => {
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
                         <label htmlFor="photoUrl" className="block font-medium">
-                            Photo URL
+                            Photo
                         </label>
                         <input
                             className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700"
                             id="photoUrl"
                             placeholder="Enter Url"
-                            name="photoUrl"
-                            type="text"
+                            name="photo"
+                            type="file"
                             required
-                            {...register('photoURL')}
+                            {...register('photo')}
                         />
                     </div>
                     <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
@@ -88,6 +112,7 @@ const Register = () => {
                             Blood Group
                         </label>
                         <select className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700" name="" id="" {...register('blood')}>
+                            <option value="">Select Blood Group</option>
                             {
                                 bloods?.map(blood => <option key={blood.id} value={blood}>{blood}</option>)
                             }
@@ -98,6 +123,7 @@ const Register = () => {
                             Select Districts
                         </label>
                         <select className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700" name="" id="" {...register('district')}>
+                            <option value="">Select District</option>
                             {
                                 districts?.map(district => <option key={district.id} value={district?.name}>{district?.name}</option>)
                             }
@@ -108,6 +134,7 @@ const Register = () => {
                             Select Upozila
                         </label>
                         <select className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700" name="" id="" {...register('upozila')}>
+                            <option value="">Select Upozila</option>
                             {
                                 upozilas?.map(upozila => <option key={upozila.id} value={upozila?.name}>{upozila?.name}</option>)
                             }
@@ -138,7 +165,7 @@ const Register = () => {
                             name="confirm-password"
                             type="password"
                             required
-                            {...register('confirm-password')}
+                            {...register('confirmPassword')}
                         />
                     </div>
                     <input type="submit" value='Submit' className="w- rounded-md bg-cyan-700 px-4 py-2 text-white transition-colors hover:bg-cyan-900 dark:bg-cyan-700 cursor-pointer" />
