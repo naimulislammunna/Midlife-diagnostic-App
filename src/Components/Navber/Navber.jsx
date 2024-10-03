@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
+import Loading from "../Loader/Loading";
 
 
 const Navber = () => {
-    const { logOut } = useContext(AuthContext);
-
+    const {userInfo,  logOut, loading} = useContext(AuthContext);
     const handleLogOut = () => {
         logOut();
     }
@@ -52,15 +52,13 @@ const Navber = () => {
                     </ul>
                 </div>
                 <div className="flex-none">
-                    {/* {
+                    {
                         userInfo?.email || <Link to='/register'>
                             <button className="button">Register</button>
-                        </Link>
-                    } */}
-                    <Link to='/register'>
-                        <button className="button">Register</button>
-                    </Link>
-                    {/* {userInfo && <div className="dropdown dropdown-end">
+                        </Link> 
+                    }
+                    
+                    {userInfo && <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img
@@ -79,8 +77,7 @@ const Navber = () => {
                             <li className="my-3"><Link to='/admin-dashboard'>Admin-dashboard</Link></li>
                             <li>{userInfo && <button onClick={handleLogOut} className="px-4 py-2 rounded-full bg-white">Sign Out</button>}</li>
                         </ul>
-                    </div>} */}
-                    <button onClick={handleLogOut} className="button">Sign Out</button>
+                    </div>}
                 </div>
             </div>
 

@@ -1,11 +1,15 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { UserContext } from "../../Provider/UserProvider";
 
 const Sidebar = () => {
+    const {data} = useContext(UserContext);
     const items = <>
         <NavLink><button className="button">My Profile</button></NavLink>
         <NavLink to='manage-users'><button className="button">My Appointments</button></NavLink>
         <NavLink to='activities'><button className="button">Test results</button></NavLink>
     </>
+    console.log("context", data);
     
     return (
         <>
@@ -23,11 +27,6 @@ const Sidebar = () => {
                             strokeWidth="2"
                             d="M4 6h16M4 12h8m-8 6h16" />
                     </svg>
-                    <div className="flex">
-                        <Link to='/'>
-                            <a className="btn btn-ghost text-2xl lg:text-4xl logo gap-0 p-1">Midlife</a>
-                        </Link>
-                    </div>
                 </div>
                 
                 <ul
@@ -36,12 +35,11 @@ const Sidebar = () => {
                     {items}
                 </ul>
             </div>
-            <div className="hidden sm:flex sm:flex-col justify-between bg-mySky text-white min-h-screen p-10">
+            <div className="hidden sm:flex sm:flex-col justify-between bg-mySky text-white min-h-screen p-5">
                 <div className="flex flex-col gap-3">
-                    <div className="flex">
-                        <Link to='/'>
-                            <a className="btn btn-ghost text-2xl lg:text-4xl logo gap-0 p-1">Midlife</a>
-                        </Link>
+                    <div>
+                        <img className="w-[150px] h-[150px] rounded-full border-4 border-white  mx-auto" src={data?.photo} alt="" />
+                        <h3 className="text-lg font-bold text-myBlue text-center my-2">{data?.name}</h3>
                     </div>
                     {items}
                 </div>
