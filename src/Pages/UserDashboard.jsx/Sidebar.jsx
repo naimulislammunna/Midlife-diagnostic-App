@@ -1,16 +1,16 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { UserContext } from "../../Provider/UserProvider";
 
 const Sidebar = () => {
-    const {data} = useContext(UserContext);
+    const { data } = useContext(UserContext);
     const items = <>
-        <NavLink><button className="button">My Profile</button></NavLink>
-        <NavLink to='manage-users'><button className="button">My Appointments</button></NavLink>
-        <NavLink to='activities'><button className="button">Test results</button></NavLink>
+        <NavLink className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Profile</button></NavLink>
+        <NavLink to='my-appointments' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Appointments</button></NavLink>
+        <NavLink to='test-results' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Test results</button></NavLink>
     </>
     console.log("context", data);
-    
+
     return (
         <>
             <div className="dropdown px-4 sm:px-0">
@@ -28,18 +28,18 @@ const Sidebar = () => {
                             d="M4 6h16M4 12h8m-8 6h16" />
                     </svg>
                 </div>
-                
+
                 <ul
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-3">
                     {items}
                 </ul>
             </div>
-            <div className="hidden sm:flex sm:flex-col justify-between bg-mySky text-white min-h-screen p-5">
+            <div className="hidden sm:flex sm:flex-col justify-between bg-myBlue2 text-white min-h-screen w-52 py-5">
                 <div className="flex flex-col gap-3">
                     <div>
                         <img className="w-[150px] h-[150px] rounded-full border-4 border-white  mx-auto" src={data?.photo} alt="" />
-                        <h3 className="text-lg font-bold text-myBlue text-center my-2">{data?.name}</h3>
+                        <h3 className="text-sm font-bold  text-white text-center my-2 ">{data?.name}</h3>
                     </div>
                     {items}
                 </div>

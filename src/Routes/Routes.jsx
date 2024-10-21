@@ -5,6 +5,8 @@ import Register from "../Pages/Register/Register";
 import SignIn from "../Pages/SignIn/SignIn";
 import UserDashboardLayout from "../LayOut/UserDashboardLayout";
 import MyProfile from "../Pages/UserDashboard.jsx/MyProfile";
+import MyAppointment from "../Pages/UserDashboard.jsx/MyAppointment";
+import TestResult from "../Pages/UserDashboard.jsx/TestResult";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <MyProfile></MyProfile>
+            },
+            {
+                path: 'my-appointments',
+                element: <MyAppointment/>
+            },
+            {
+                path: 'test-results',
+                element: <TestResult/>
             }
         ]
     }

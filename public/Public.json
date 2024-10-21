@@ -1,0 +1,57 @@
+[
+    {
+        "title": "Complete Blood Count (CBC)",
+        "image": "https://i.postimg.cc/Zn9kzRnj/cute-little-girl-sitting-dentist-s-office.jpg",
+        "description": "A CBC test measures the levels of different components of blood such as red blood cells, white blood cells, hemoglobin, and platelets.",
+        "price": 50,
+        "date": "2024-11-01",
+        "slots": 10
+    },
+    {
+        "title": "Lipid Profile Test",
+        "image": "https://i.postimg.cc/R0Rxcy21/doctor-explaining-radiography-diagnosis-man-with-disease-checkup-visit-specialist-showing-x-ray-scan.jpg",
+        "description": "This test measures your cholesterol levels, including HDL, LDL, and triglycerides, to assess cardiovascular health.",
+        "price": 70,
+        "date": "2024-11-02",
+        "slots": 7
+    },
+    {
+        "title": "Thyroid Function Test",
+        "image": "https://i.postimg.cc/85X8YWpj/old-man-sitting-dentist-s-office.jpg",
+        "description": "This test measures the levels of thyroid hormones in the blood to diagnose thyroid disorders.",
+        "price": 60,
+        "date": "2024-11-03",
+        "slots": 15
+    },
+    {
+        "title": "Liver Function Test",
+        "image": "https://i.postimg.cc/s2yRGsHD/old-man-sitting-dentist-s-office-1.jpg",
+        "description": "A liver function test measures enzymes and proteins in the blood to check the health of your liver.",
+        "price": 80,
+        "date": "2024-11-04",
+        "slots": 12
+    },
+    {
+        "title": "Urine Analysis",
+        "image": "https://i.postimg.cc/cHLyTTNp/researcher-doctor-with-ppe-equipment-looking-into-medical-microscope-analyzing-virus-sample-during-v.jpg",
+        "description": "Urine analysis is used to detect a wide range of disorders, including urinary tract infections, kidney disease, and diabetes.",
+        "price": 40,
+        "date": "2024-11-05",
+        "slots": 10
+    },
+    {
+        "title": "X-Ray",
+        "image": "https://i.postimg.cc/NFZ3scrt/specialist-researcher-holding-microscope-slide-analyzing-blood-sample-working-coronavirus-vaccine-de.jpg",
+        "description": "An X-ray test is used to create images of the inside of your body to diagnose fractures, infections, or other issues.",
+        "price": 100,
+        "date": "2024-11-06",
+        "slots": 5
+    }
+]
+
+https: //i.postimg.cc/Zn9kzRnj/cute-little-girl-sitting-dentist-s-office.jpg
+https: //i.postimg.cc/R0Rxcy21/doctor-explaining-radiography-diagnosis-man-with-disease-checkup-visit-specialist-showing-x-ray-scan.jpg
+https: //i.postimg.cc/85X8YWpj/old-man-sitting-dentist-s-office.jpg
+https: //i.postimg.cc/s2yRGsHD/old-man-sitting-dentist-s-office-1.jpg
+https: //i.postimg.cc/cHLyTTNp/researcher-doctor-with-ppe-equipment-looking-into-medical-microscope-analyzing-virus-sample-during-v.jpg
+https: //i.postimg.cc/NFZ3scrt/specialist-researcher-holding-microscope-slide-analyzing-blood-sample-working-coronavirus-vaccine-de.jpg

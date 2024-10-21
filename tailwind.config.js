@@ -9,6 +9,7 @@ export default {
       colors: {
         'myBlue': '#2D3663',
         'mySky': '#47CCCB',
+        'myBlue2': '#0D46C1'
       }
     },
   },
