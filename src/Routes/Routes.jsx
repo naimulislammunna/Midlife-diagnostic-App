@@ -7,6 +7,8 @@ import UserDashboardLayout from "../LayOut/UserDashboardLayout";
 import MyProfile from "../Pages/UserDashboard.jsx/MyProfile";
 import MyAppointment from "../Pages/UserDashboard.jsx/MyAppointment";
 import TestResult from "../Pages/UserDashboard.jsx/TestResult";
+import AllTests from "../Pages/AllTests/AllTests";
+import TestDetails from "../Pages/AllTests/TestDetails";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +26,15 @@ const router = createBrowserRouter([
             {
                 path: '/sign-in',
                 element: <SignIn></SignIn>
+            },
+            {
+                path: '/all-tests',
+                element: <AllTests/>
+            },
+            {
+                path: '/test/:id',
+                element: <TestDetails/>,
+                loader: ({params}) => fetch(`http://localhost:5000/${params.id}`)
             }
         ]
     },
