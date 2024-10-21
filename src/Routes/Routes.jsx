@@ -9,6 +9,7 @@ import MyAppointment from "../Pages/UserDashboard.jsx/MyAppointment";
 import TestResult from "../Pages/UserDashboard.jsx/TestResult";
 import AllTests from "../Pages/AllTests/AllTests";
 import TestDetails from "../Pages/AllTests/TestDetails";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -34,13 +35,13 @@ const router = createBrowserRouter([
             {
                 path: '/test/:id',
                 element: <TestDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/test/${params.id}`)
             }
         ]
     },
     {
         path: '/user-dashboard',
-        element: <UserDashboardLayout/>,
+        element: <PrivateRoutes><UserDashboardLayout/></PrivateRoutes>,
         children: [
             {
                 index: true,

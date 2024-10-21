@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../Provider/UserProvider";
 
 const Sidebar = () => {
@@ -42,6 +42,9 @@ const Sidebar = () => {
                         <h3 className="text-sm font-bold  text-white text-center my-2 ">{data?.name}</h3>
                     </div>
                     {items}
+                </div>
+                <div className="text-center">
+                    <Link to='/'>Home</Link>
                 </div>
             </div>
         </>
