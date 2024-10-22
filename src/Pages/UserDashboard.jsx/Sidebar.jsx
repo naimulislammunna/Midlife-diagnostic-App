@@ -9,7 +9,6 @@ const Sidebar = () => {
         <NavLink to='my-appointments' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Appointments</button></NavLink>
         <NavLink to='test-results' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Test results</button></NavLink>
     </>
-    console.log("context", data);
 
     return (
         <>
