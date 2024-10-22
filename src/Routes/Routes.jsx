@@ -13,6 +13,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import AllUsers from "../Pages/AdminDashboard/AllUsers";
 import AdminDashboardLayout from "../LayOut/AdminDashboardLayout";
 import AddTest from "../Pages/AdminDashboard/AddTest";
+import TotalTests from "../Pages/AdminDashboard/TotalTests";
 
 const router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
             {
                 path: 'add-test',
                 element: <AddTest/>
+            },
+            {
+                path: 'all-test',
+                element: <TotalTests/>
             }
         ]
     }
