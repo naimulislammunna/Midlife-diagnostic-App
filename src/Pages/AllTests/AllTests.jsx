@@ -4,7 +4,7 @@ import SingleTest from "./singleTest";
 
 const AllTests = () => {
     const axiosPublic = useAxiosPublic();
-
+    
     const { data } = useQuery({
         queryKey: ['all-test'],
         queryFn: async () => {
