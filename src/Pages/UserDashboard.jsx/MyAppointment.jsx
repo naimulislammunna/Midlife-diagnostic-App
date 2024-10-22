@@ -2,11 +2,12 @@ import { useQuery } from "react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Loading from "../../Components/Loader/Loading";
+import toast, { Toaster } from "react-hot-toast";
 
 const MyAppointment = () => {
     const { userInfo } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { data, loading } = useQuery({
+    const { data, loading , refetch} = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
             const response = await axiosSecure.get(`/booking?email=${userInfo?.email}`);
@@ -14,25 +15,35 @@ const MyAppointment = () => {
         }
     })
 
-    const handleCencel = (id) =>{
-        const res = axiosSecure.delete(`/booking/${id}`);
-        console.log(res);
-        
+    const handleCencel = async (id) => {
+        toast(() => (
+            <span>
+                Do you Want to Cencel test
+                <button onClick={async () => {
+                    const res = await axiosSecure.delete(`/booking/${id}`);
+                    if (res.data?.deletedCount) {
+                        toast.success("Test Cenceled")
+                        refetch();
+                    }
+                }} className="bg-blue-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-4 rounded-md ml-2">
+                    Cencel
+                </button>
+            </span >
+        ));
+
+        // 
+
     }
-    // toast((t) => (
-    //   <span>
-    //   Custom and <b>bold</b>
-    //   <button onClick={() => toast.dismiss(t.id)}>
-    //     Dismiss
-    //   </button>
-    // </span>
-    // ));
-    console.log(data);
+
 
     if (loading) return <Loading />
 
     return (
         <div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <div className="overflow-x-auto">
                 <h1 className="text-center text-xl font-semibold mt-5">My Appoinments</h1>
                 <table className="min-w-[90%] shadow-md border mx-auto border-gray-100 my-6">
@@ -52,8 +63,8 @@ const MyAppointment = () => {
                                     <img src={test?.image} alt="table navigate ui" className="h-16 w-16 object-cover rounded-full bg-gray-300" />
                                 </td>
                                 <td className="py-4 px-6 border-b text-xl font-medium">{test?.title}</td>
-                                <td className="py-4 px-6 border-b text-lg font-medium">${test?.price}</td>
-                                <td className="py-4 px-6 border-b text-lg font-medium">${test?.date}</td>
+                                <td className="py-4 px-6 border-b text-lg font-medium">$ {test?.price}</td>
+                                <td className="py-4 px-6 border-b text-lg font-medium">{test?.date}</td>
                                 <td className="py-4 px-6 border-b text-end">
                                     <button onClick={() => handleCencel(test._id)} className="bg-blue-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-4 rounded-md">Cencel</button>
                                 </td>

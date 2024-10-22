@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Auth/AuthProvider";
 import axios from "axios";
@@ -10,10 +10,9 @@ const Register = () => {
     const { handleRegister } = useContext(AuthContext);
     const [districts, setDistricts] = useState([]);
     const [upozilas, setUpozilas] = useState([]);
-    const [formData, setFormData] = useState([]);
     const bloods = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
     const imgKey = import.meta.env.VITE_imgBB_key;
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
         fetch('../../../public/Districts.json')

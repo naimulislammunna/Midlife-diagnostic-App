@@ -13,7 +13,7 @@ const UserProvider = ({children}) => {
     const {data, isLoading} = useQuery({
         queryKey: ["users"],
         queryFn: async () =>{
-            const response = await axiosSecure.get(`/users?email=${userInfo?.email}`)
+            const response = await axiosSecure.get(`/user?email=${userInfo?.email}`)
             return response;
         }
     })

@@ -10,6 +10,8 @@ import TestResult from "../Pages/UserDashboard.jsx/TestResult";
 import AllTests from "../Pages/AllTests/AllTests";
 import TestDetails from "../Pages/AllTests/TestDetails";
 import PrivateRoutes from "./PrivateRoutes";
+import AllUsers from "../Pages/AdminDashboard/AllUsers";
+import AdminDashboardLayout from "../LayOut/AdminDashboardLayout";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +56,16 @@ const router = createBrowserRouter([
             {
                 path: 'test-results',
                 element: <TestResult/>
+            }
+        ]
+    },
+    {
+        path: '/admin-dashboard',
+        element: <AdminDashboardLayout/>,
+        children: [
+            {
+                index: true,
+                element: <AllUsers/>
             }
         ]
     }
