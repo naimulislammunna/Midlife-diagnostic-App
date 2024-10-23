@@ -6,7 +6,7 @@ import User from "./User";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading , refetch} = useQuery({
         queryKey: [''],
         queryFn: async () => {
             const response = await axiosSecure.get('/users');
@@ -72,7 +72,7 @@ const AllUsers = () => {
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         {
-                                        data?.map(user => <User key={user._id} user={user}></User>)
+                                        data?.map(user => <User key={user._id} user={user} refetch={refetch}></User>)
                                        }
 
 
