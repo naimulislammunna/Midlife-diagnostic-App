@@ -18,7 +18,7 @@ const TotalTests = () => {
             <span>
                 Do you Want to Delete test
                 <button onClick={async () => {
-                    const res = await axiosSecure.delete(`/booking/${id}`);
+                    const res = await axiosSecure.delete(`/all-test/${id}`);
                     if (res.data?.deletedCount) {
                         toast.success("Test Cenceled")
                         refetch();

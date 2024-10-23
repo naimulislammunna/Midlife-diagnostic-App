@@ -1,5 +1,19 @@
+import jsPDF from "jspdf";
 
 const User = ({ user }) => {
+    const handleDwonload = () => {
+        const doc = new jsPDF();
+        doc.setFontSize(26);
+        doc.text("Mid Life Diagnostic Center", 105, 30, null, null, "center");
+        doc.setFontSize(18);
+
+        doc.text(`Name: ${user?.name}`, 105, 40, null, null, "center");
+
+        doc.text(`Email: ${user?.email}`, 105, 50, null, null, "center");
+
+        doc.text(`Blood group: ${user?.blood}`, 105, 60, null, null, "center");
+        doc.save("a4.pdf");
+    }
     return (
         <>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
@@ -41,7 +55,7 @@ const User = ({ user }) => {
                 </div></td>
                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                     <div className="flex items-center gap-x-2">
-                        <p className="px-3 py-1 text-xs text-indigo-500 rounded-full dark:bg-gray-800 bg-indigo-100/60">Dwonload</p>
+                        <button onClick={() => handleDwonload(user._id)} className="px-3 py-1 text-xs text-indigo-500 rounded-full dark:bg-gray-800 bg-indigo-100/60">Dwonload</button>
                     </div>
                 </td>
                 <td className="px-4 py-4 text-sm whitespace-nowrap">
