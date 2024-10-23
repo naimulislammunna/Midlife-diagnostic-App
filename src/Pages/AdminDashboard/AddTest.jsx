@@ -36,9 +36,6 @@ const AddTest = () => {
         if (res.data?.insertedId) {
             toast.success("Test Added")
         }
-
-
-
     }
     return (
         <div>

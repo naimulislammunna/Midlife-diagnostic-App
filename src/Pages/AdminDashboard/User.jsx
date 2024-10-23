@@ -37,6 +37,24 @@ const User = ({ user, refetch }) => {
             refetch();
         }
     }
+    const handleStatus = async (e) => {
+        const text = e.target.innerText;
+        console.log(text);
+
+        // const res = await axiosSecure.patch(`/users/${id}`);
+        // if (res.data?.modifiedCount > 0) {
+        //     toast.success('User Blocked',
+        //         {
+        //             style: {
+        //                 borderRadius: '10px',
+        //                 background: '#333',
+        //                 color: '#fff',
+        //             },
+        //         }
+        //     );
+        //     refetch();
+        // }
+    }
     const handleRole = async (id) => {
         const res = await axiosSecure.patch(`/users-role/${id}`);
         console.log(res);
@@ -104,7 +122,7 @@ const User = ({ user, refetch }) => {
                     <div onClick={() => handleRole(user._id)} className="cursor-pointer">
                         {
                             user?.role === 'Admin' ? <>
-                                <p className="flex justify-center text-xl text-emerald-600"><MdAdminPanelSettings/></p>
+                                <p className="flex justify-center text-xl text-emerald-600"><MdAdminPanelSettings /></p>
                                 <p className="text-center"><span>Admin</span></p>
                             </>
                                 : <>
@@ -126,7 +144,7 @@ const User = ({ user, refetch }) => {
                 </td>
                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                     <div className="flex items-center">
-                        <p onClick={() => handleBlock(user._id)} className={`${user.status === 'Blocked' ? 'px-4 py-2 text-xs text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 cursor-pointer' : ' px-4 py-2 text-xs text-red-500 rounded-full dark:bg-gray-800 bg-red-100/60 cursor-pointer'}`}>{user.status === 'Blocked' ? 'Active' : 'Block'}</p>
+                        <p onClick={() => { handleBlock(user._id); () => handleStatus() }} className={`${user.status === 'Blocked' ? 'px-4 py-2 text-xs text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 cursor-pointer' : ' px-4 py-2 text-xs text-red-500 rounded-full dark:bg-gray-800 bg-red-100/60 cursor-pointer'}`}>{user.status === 'Blocked' ? 'Active' : 'Block'}</p>
                     </div>
                 </td>
             </tr>

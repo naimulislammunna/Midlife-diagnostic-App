@@ -14,6 +14,7 @@ import AllUsers from "../Pages/AdminDashboard/AllUsers";
 import AdminDashboardLayout from "../LayOut/AdminDashboardLayout";
 import AddTest from "../Pages/AdminDashboard/AddTest";
 import TotalTests from "../Pages/AdminDashboard/TotalTests";
+import Reservation from "../Pages/AdminDashboard/Reservation";
 
 const router = createBrowserRouter([
     {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             {
                 path: 'all-test',
                 element: <TotalTests/>
+            },
+            {
+                path: 'reservation',
+                element: <Reservation/>
             }
         ]
     }

@@ -8,6 +8,7 @@ const AdminSidebar = () => {
         <NavLink className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>All Users</button></NavLink>
         <NavLink to='add-test' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Add Test</button></NavLink>
         <NavLink to='all-test' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>All Test</button></NavLink>
+        <NavLink to='reservation' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Reservation</button></NavLink>
     </>
 
     return (
