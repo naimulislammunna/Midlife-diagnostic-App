@@ -2,6 +2,8 @@
 import jsPDF from "jspdf";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import { FaUser } from "react-icons/fa";
+import { MdAdminPanelSettings } from "react-icons/md";
 
 const User = ({ user, refetch }) => {
     const axiosSecure = useAxiosSecure();
@@ -34,9 +36,25 @@ const User = ({ user, refetch }) => {
             );
             refetch();
         }
-
-
     }
+    const handleRole = async (id) => {
+        const res = await axiosSecure.patch(`/users-role/${id}`);
+        console.log(res);
+
+        if (res.data?.modifiedCount > 0) {
+            toast.success('Make Admin Succesfully',
+                {
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
+            refetch();
+        }
+    }
+
 
     return (
         <>
@@ -82,7 +100,20 @@ const User = ({ user, refetch }) => {
                         <h2 className={`${user.status === 'Blocked' ? 'text-red-500' : 'text-sm font-normal text-emerald-500'}`}>{user?.status}</h2>
                     </div>
                 </td>
-                <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Admin</td>
+                <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                    <div onClick={() => handleRole(user._id)} className="cursor-pointer">
+                        {
+                            user?.role === 'Admin' ? <>
+                                <p className="flex justify-center text-xl text-emerald-600"><MdAdminPanelSettings/></p>
+                                <p className="text-center"><span>Admin</span></p>
+                            </>
+                                : <>
+                                    <p className="flex justify-center"><FaUser /> </p>
+                                    <p className="text-center"><span>User</span></p>
+                                </>
+                        }
+                    </div>
+                </td>
                 <td onClick={() => document.getElementById('my_modal_5').showModal()} className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                     <div className="flex items-center gap-x-2">
                         <p className="px-3 py-2 text-xs text-indigo-500 rounded-full dark:bg-gray-800 border border-blue-600 cursor-pointer">User Info</p>
@@ -95,7 +126,7 @@ const User = ({ user, refetch }) => {
                 </td>
                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                     <div className="flex items-center">
-                        <p onClick={() => handleBlock(user._id)} className={`${user.status === 'Blocked' ? 'px-4 py-2 text-xs text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 cursor-pointer': ' px-4 py-2 text-xs text-red-500 rounded-full dark:bg-gray-800 bg-red-100/60 cursor-pointer'}`}>{user.status === 'Blocked' ? 'Active': 'Block'}</p>
+                        <p onClick={() => handleBlock(user._id)} className={`${user.status === 'Blocked' ? 'px-4 py-2 text-xs text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 cursor-pointer' : ' px-4 py-2 text-xs text-red-500 rounded-full dark:bg-gray-800 bg-red-100/60 cursor-pointer'}`}>{user.status === 'Blocked' ? 'Active' : 'Block'}</p>
                     </div>
                 </td>
             </tr>
