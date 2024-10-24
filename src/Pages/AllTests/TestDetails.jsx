@@ -4,6 +4,9 @@ import { CiCalendarDate } from "react-icons/ci";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
 const TestDetails = () => {
     // const { userInfo } = useAuth();
@@ -25,6 +28,8 @@ const TestDetails = () => {
     //     }
     // }
 
+    // Payment method
+    const stripePromise = loadStripe(import.meta.env.VITE_Stripe_Api_Key);
 
     return (
         <div className="p-20">
@@ -58,7 +63,7 @@ const TestDetails = () => {
                     position="top-center"
                     reverseOrder={false}
                 />
-                <div className="modal-box max-w-[75%] max-h-[90%] py-4">
+                <div className="modal-box max-w-[60%] max-h-[90%] p-10">
                     <form method="dialog" className="text-end">
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn">Close</button>
@@ -66,34 +71,9 @@ const TestDetails = () => {
                     <div className="my-2">
                         <div className="mx-auto w-full max-w-3xl space-y-2 rounded-lg border bg-white px-10 py-5 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
 
-                            <form className="space-y-2 grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
-                                <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300 mt-5">
-                                    <label htmlFor="username_2" className="block font-medium">
-                                        Tk
-                                    </label>
-                                    <input
-                                        className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700"
-                                        id="username_2"
-                                        placeholder="Enter Test diabetes"
-                                        type="text"
-                                        required
-                                    />
-                                </div>
-                                <div className="space-y-2 text-sm text-cyan-700 dark:text-cyan-300">
-                                    <label htmlFor="email" className="block font-medium">
-                                        Amount
-                                    </label>
-                                    <input
-                                        className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-cyan-700"
-                                        id="email"
-                                        placeholder="Enter CBC"
-                                        name="CBC"
-                                        type="text"
-                                        required
-                                    />
-                                </div>
-                                <input type="submit" value='Add Result' className="w- rounded-md bg-cyan-700 px-4 py-2 text-white transition-colors hover:bg-cyan-900 dark:bg-cyan-700 cursor-pointer" />
-                            </form>
+                            <Elements stripe={stripePromise}>
+                                <CheckoutForm/>
+                            </Elements>
                         </div>
                     </div>
                 </div>
