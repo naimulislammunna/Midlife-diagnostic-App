@@ -1,10 +1,11 @@
 
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Auth/AuthProvider";
 import axios from "axios";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
     const { handleRegister } = useContext(AuthContext);
@@ -13,6 +14,8 @@ const Register = () => {
     const bloods = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
     const imgKey = import.meta.env.VITE_imgBB_key;
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         fetch('../../../public/Districts.json')
@@ -33,34 +36,44 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         const { name, email, password, confirmPassword, blood, district, upozila } = data;
-        if(password === confirmPassword){
+
+        if (password === confirmPassword) {
             handleRegister(email, password)
-            .then(res => console.log(res))
-        }
-        const photo = { image: data.photo[0] }
-        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${imgKey}`, photo, {
-            headers: {
-                "content-type": "multipart/form-data"
-            }
-        })
-        const user = {
-            name,
-            email,
-            blood,
-            district,
-            upozila,
-            photo: response.data.data.display_url,
-            status: 'active'
-        }
+                .then(async () => {
+                    toast.success('Register Successfull')
+                    navigate(location?.state || '/');
+                    const photo = { image: data.photo[0] }
+                    const response = await axios.post(`https://api.imgbb.com/1/upload?key=${imgKey}`, photo, {
+                        headers: {
+                            "content-type": "multipart/form-data"
+                        }
+                    })
+                    const user = {
+                        name,
+                        email,
+                        blood,
+                        district,
+                        upozila,
+                        photo: response.data.data.display_url,
+                        status: 'active'
+                    }
 
-        const res = axiosPublic.post('/users', user);
-        console.log("server res", res);
-
+                    const res = await axiosPublic.post('/users', user);
+                    console.log("server res", res);
+                }
+                )
+                .catch(err => toast.error(err.message.split('/')[1])
+                )
+        }
 
     }
 
     return (
         <div className="my-5">
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <div className="mx-auto w-full max-w-3xl space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
                 <h1 className="text-3xl font-semibold text-cyan-600">Register</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 grid grid-cols-1 lg:grid-cols-2 lg:gap-5">

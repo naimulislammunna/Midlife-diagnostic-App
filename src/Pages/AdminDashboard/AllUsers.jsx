@@ -65,9 +65,9 @@ const AllUsers = () => {
 
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">User Details</th>
 
-                                            <th scope="col" className="relative py-3.5 px-4">
-                                                <span className="sr-only">Edit</span>
-                                            </th>
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Action</th>
+
+                                            
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">

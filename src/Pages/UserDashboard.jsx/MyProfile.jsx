@@ -1,22 +1,28 @@
 import { useContext } from "react";
 import { UserContext } from "../../Provider/UserProvider";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdBloodtype } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 
 const MyProfile = () => {
-    const {data} = useContext(UserContext);
+    const { data } = useContext(UserContext);
     return (
-        <div>
-            <div className="flex flex-col items-center justify-center md:flex-row">
-                <div className="group relative  sm:w-[350px]">
-                    <img className="w-[200px] h-[200px] scale-105 transform rounded-full bg-black/70" src={data?.photo} />
+        <div className="my-10">
+            <div className="flex max-w-[80%] mx-auto flex-col items-center justify-center md:flex-row shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
+                <div className="group relative  sm:w-[350px] flex flex-col justify-center items-center">
+                    <img className="w-[150px] h-[150px] scale-105 transform rounded-full bg-black/70 border-4 border-cyan-500" src={data?.photo} />
+                    <h3 className="text-2xl font-bold mt-4">{data?.name}</h3>
+                    <p>{data?.email}</p>
                 </div>
-                <div className="min-w-[250px] max-w-[350px] space-y-12 rounded-br-lg rounded-tr-lg bg-white p-10 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)] dark:bg-[#18181B] md:w-[350px] dark:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.8)]">
+                <div className="min-w-[250px] max-w-[350px] space-y-12 rounded-br-lg rounded-tr-lg bg-white p-10 dark:bg-[#18181B] md:w-[350px]">
                     <div className="space-y-1">
-                        <h2 className="text-center text-2xl font-medium text-gray-700 dark:text-white/90 lg:text-3xl">{data?.name}</h2>
-                        <p className="text-gray-500 dark:text-white/70">Blood Group: {data?.blood}</p>
-                    </div>
-                    <div className="flex flex-wrap items-center justify-between">
-                        <div>
-                            <p className="text-lg font-semibold">Location : kalkini , Madaripur</p>
+                        <p className="font-semibold my-3">About me</p>
+                        <p className="text-gray-500 dark:text-white/70 flex items-center gap-3"><span><MdEmail/></span> {data?.email}</p>
+                        <p className="text-gray-500 dark:text-white/70 flex items-center gap-3"> <span><MdBloodtype/></span> {data?.blood}</p>
+                        <div className="flex items-center gap-3">
+                            <FaLocationDot/>
+                            <p className="text-gray-500 dark:text-white/70">  {data?.upozila},</p>
+                            <p className="text-gray-500 dark:text-white/70">  {data?.district}</p>
                         </div>
                     </div>
                     <div>
