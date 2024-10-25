@@ -7,26 +7,37 @@ import toast, { Toaster } from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { useEffect, useState } from "react";
 
 const TestDetails = () => {
-    // const { userInfo } = useAuth();
+    const [paymentValue, setPaymentValue] = useState(false);
+    const { userInfo } = useAuth();
     const test = useLoaderData();
-    // const axiosSecure = useAxiosSecure();
+    const axiosSecure = useAxiosSecure();
 
-    // const bookInfo = {
-    //     email: userInfo.email,
-    //     title: test.title,
-    //     date: test.date,
-    //     image: test.image,
-    //     price: test.price
-    // }
+    const bookInfo = {
+        email: userInfo.email,
+        title: test.title,
+        date: test.date,
+        image: test.image,
+        price: test.price
+    }
 
-    // const handleBook = async () => {
-    //     const { data } = await axiosSecure.post(`/booking`, bookInfo);
-    //     if (data.insertedId) {
-    //         return toast.success('Test Booked')
-    //     }
-    // }
+    const handleBook = (value) => {
+        setPaymentValue(value);
+    }
+
+    useEffect(() => {
+        const handleBooking = async () => {
+            if (paymentValue) {
+                const { data } = await axiosSecure.post(`/booking`, bookInfo);
+                if (data.insertedId) {
+                    return toast.success('Test Booked')
+                }
+            }
+        }
+        handleBooking();
+    }, [paymentValue])
 
     // Payment method
     const stripePromise = loadStripe(import.meta.env.VITE_Stripe_Api_Key);
@@ -54,7 +65,7 @@ const TestDetails = () => {
                     </div>
                     <div className="card-actions justify-between">
                         <p className="flex gap-2 items-center"><HiOutlineCurrencyDollar /> {test.price}</p>
-                        <button onClick={() => { document.getElementById('my_modal_1').showModal()}}className="btn btn-primary">Book Now</button>
+                        <button onClick={() => { document.getElementById('my_modal_1').showModal() }} className="btn btn-primary">Book Now</button>
                     </div>
                 </div>
             </div>
@@ -72,7 +83,7 @@ const TestDetails = () => {
                         <div className="mx-auto w-full max-w-3xl space-y-2 rounded-lg border bg-white px-10 py-5 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
 
                             <Elements stripe={stripePromise}>
-                                <CheckoutForm/>
+                                <CheckoutForm price={test?.price} handleBook={handleBook} />
                             </Elements>
                         </div>
                     </div>

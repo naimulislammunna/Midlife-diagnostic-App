@@ -1,11 +1,29 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ price , handleBook}) => {
+  const {userInfo} = useAuth();
   const [error, setError] = useState('');
+  const [secret, setSecret] = useState('');
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const axiosSecure = useAxiosSecure();
+  const amount = price;
+
+  handleBook(paymentSuccess);
+
+  useEffect(() => {
+    const stripeIntent = async () => {
+      const response = await axiosSecure.post('/create-payment-intent', { price: amount });
+      setSecret(response.data.clientSecret)
+      
+    }
+    stripeIntent();
+  }, [amount])
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -32,13 +50,35 @@ const CheckoutForm = () => {
       setError(error.message);
     } else {
       console.log('[ srtipe PaymentMethod]', paymentMethod);
-      toast.success('Payment Successfully Done')
       setError('')
+
+      const {paymentIntent, error: intentError} = await stripe.confirmCardPayment(secret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: userInfo?.displayName || "anonymous",
+            email: userInfo?.email || "anonymous"
+          }
+        }
+      })
+
+      if(intentError){
+        console.log('intent error', intentError);
+        
+      }
+      else{
+        console.log('payment Intent', paymentIntent);
+        if(paymentIntent.status === 'succeeded'){
+          setPaymentSuccess(true);
+          toast.success('Payment Successfully Done');
+        }
+      }
     }
   };
 
   return (
     <div>
+      <h3 className="my-4 text-md font-semibold">Total Price: $ {amount}</h3>
       <form onSubmit={handleSubmit}>
         <CardElement
           className="h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none border-cyan-700"
@@ -59,7 +99,7 @@ const CheckoutForm = () => {
         />
         <p className="text-red-600">{error}</p>
         {/*  Payment Button Start */}
-        <button  type="submit" disabled={!stripe} className="button-3 my-4">
+        <button type="submit" disabled={!stripe} className="button-3 my-4">
           <span className="button-decor"></span>
           <div className="button-content">
             <div className="button__icon ">
