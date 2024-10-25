@@ -4,8 +4,10 @@ import Navber from "../Components/Navber/Navber";
 const UserLayout = () => {
     return (
         <>
+            <div className="container">
             <Navber></Navber>
             <Outlet></Outlet>
+            </div>
         </>
     );
 };

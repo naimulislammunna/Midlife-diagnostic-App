@@ -17,9 +17,16 @@ body{
 }
 
 .container{
-  width: 90%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
+}
+@media screen and (min-width: 540px) {
+  .container{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 .button{
   background-color: #2D3663;
