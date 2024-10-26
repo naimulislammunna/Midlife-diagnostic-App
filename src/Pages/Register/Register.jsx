@@ -55,7 +55,7 @@ const Register = () => {
                         district,
                         upozila,
                         photo: response.data.data.display_url,
-                        status: 'active'
+                        status: 'Active'
                     }
 
                     const res = await axiosPublic.post('/users', user);

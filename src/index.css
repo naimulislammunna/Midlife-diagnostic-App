@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Permanent+Marker&family=Sriracha&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,14 +8,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 body{
   max-width: 1440px;
   background-color: #F6FDFE;
 }
-
+.logo{
+  font-family: "Sriracha", cursive;
+  font-weight: 700;
+}
 .container{
   width: 95%;
   margin-left: auto;

@@ -5,9 +5,11 @@ import { UserContext } from "../../Provider/UserProvider";
 const Sidebar = () => {
     const { data } = useContext(UserContext);
     const items = <>
-        <NavLink className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Profile</button></NavLink>
-        <NavLink to='my-appointments' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Appointments</button></NavLink>
-        <NavLink to='test-results' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-myBlue text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Test results</button></NavLink>
+        <NavLink to='/user-dashboard' end className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Profile</button></NavLink>
+
+        <NavLink to='my-appointments' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Appointments</button></NavLink>
+
+        <NavLink to='test-results' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Test results</button></NavLink>
     </>
 
     return (
@@ -34,7 +36,7 @@ const Sidebar = () => {
                     {items}
                 </ul>
             </div>
-            <div className="hidden sm:flex sm:flex-col justify-between bg-myBlue2 text-white min-h-screen w-52 py-5">
+            <div className="hidden sm:flex sm:flex-col justify-between bg-myBlue text-white min-h-screen w-52 py-5">
                 <div className="flex flex-col gap-3">
                     <div>
                         <img className="w-[150px] h-[150px] rounded-full border-4 border-white  mx-auto" src={data?.photo} alt="" />

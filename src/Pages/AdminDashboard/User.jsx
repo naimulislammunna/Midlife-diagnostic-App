@@ -24,7 +24,7 @@ const User = ({ user, refetch }) => {
     }
 
     const handleBlock = async (id) => {
-        const res = await axiosSecure.patch(`/users/${id}`);
+        const res = await axiosSecure.patch(`/block-users/${id}`);
         if (res.data?.modifiedCount > 0) {
             toast.success('User Blocked',
                 {
@@ -38,23 +38,13 @@ const User = ({ user, refetch }) => {
             refetch();
         }
     }
-    const handleStatus = async (e) => {
-        const text = e.target.innerText;
-        console.log(text);
+    const handleActive = async (id) => {
 
-        // const res = await axiosSecure.patch(`/users/${id}`);
-        // if (res.data?.modifiedCount > 0) {
-        //     toast.success('User Blocked',
-        //         {
-        //             style: {
-        //                 borderRadius: '10px',
-        //                 background: '#333',
-        //                 color: '#fff',
-        //             },
-        //         }
-        //     );
-        //     refetch();
-        // }
+        const res = await axiosSecure.patch(`/active-users/${id}`);
+        if (res.data?.modifiedCount > 0) {
+            toast.success('User Active');
+            refetch();
+        }
     }
     const handleRole = async (id) => {
         const res = await axiosSecure.patch(`/users-role/${id}`);
@@ -83,10 +73,10 @@ const User = ({ user, refetch }) => {
             />
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="bg-white px-10 rounded-3xl max-w-[75%] max-h-[90%] py-10">
-                <form method="dialog" className="text-end">
-                    {/* if there is a button in form, it will close the modal */}
-                    <button className="btn">Close</button>
-                </form>
+                    <form method="dialog" className="text-end">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                    </form>
                     <div className="my-2">
                         <div className="flex max-w-[80%] mx-auto flex-col items-center justify-center md:flex-row shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
                             <div className="group relative  sm:w-[350px] flex flex-col justify-center items-center">
@@ -160,7 +150,14 @@ const User = ({ user, refetch }) => {
                 </td>
                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                     <div className="flex items-center">
-                        <p onClick={() => { handleBlock(user._id); () => handleStatus() }} className={`${user.status === 'Blocked' ? 'px-4 py-2 text-xs text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 cursor-pointer' : ' px-4 py-2 text-xs text-red-500 rounded-full dark:bg-gray-800 bg-red-100/60 cursor-pointer'}`}>{user.status === 'Blocked' ? 'Active' : 'Block'}</p>
+
+                        {
+                            user?.status === 'Active' ? <p onClick={() => handleBlock(user._id)} className=' px-4 py-2 text-xs text-red-500 rounded-full dark:bg-gray-800 bg-red-100/60 cursor-pointer' >Block</p>
+                                :
+                                <p onClick={() => handleActive(user._id)} className='px-4 py-2 text-xs text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 cursor-pointer' >Active</p>
+                        }
+
+
                     </div>
                 </td>
             </tr>

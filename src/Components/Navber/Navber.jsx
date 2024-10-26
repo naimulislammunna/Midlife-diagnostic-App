@@ -1,24 +1,23 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
-import Loading from "../Loader/Loading";
 
 
 const Navber = () => {
-    const {userInfo,  logOut, loading} = useContext(AuthContext);
+    const {userInfo,  logOut} = useContext(AuthContext);
     const handleLogOut = () => {
         logOut();
     }
 
 
     const items = <>
-        <NavLink to='/'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-orange">Home</button></NavLink>
-        <NavLink to='/all-tests'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-orange">All Tests</button></NavLink>
-        <NavLink to='/user-dashboard'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-orange">My Dashboard</button></NavLink>
+        <NavLink to='/'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Home</button></NavLink>
+        <NavLink to='/all-tests'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">All Tests</button></NavLink>
+        <NavLink to='/user-dashboard'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">My Dashboard</button></NavLink>
     </>
     return (
-        <div className="home-container flex bg-white border-b-2 border-blue-800">
-            <div className="navbar flex justify-between">
+        <div className="bg-white flex"> 
+            <div className="navbar container flex justify-between">
                 <div>
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden p-0">
@@ -43,7 +42,8 @@ const Navber = () => {
                     </div>
                     <div className="flex">
                         <Link to='/'>
-                            <a className="btn btn-ghost text-2xl lg:text-4xl logo gap-0 p-1">Mid<span className="text-myBlue logo">Life</span></a>
+                            <a className="logo text-4xl text-mySky">Mid<span className="text-myBlue logo">Life</span></a>
+                            <p className="text-myBlue text-center font-semibold">Diagnostic</p>
                         </Link>
                     </div>
                 </div>
@@ -81,7 +81,6 @@ const Navber = () => {
                     </div>}
                 </div>
             </div>
-
         </div>
     );
 };

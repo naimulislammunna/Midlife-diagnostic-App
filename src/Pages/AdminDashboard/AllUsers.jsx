@@ -18,7 +18,7 @@ const AllUsers = () => {
     if (isLoading) return <Loading />
     return (
         <>
-            <section className="container px-4 mx-auto">
+            <section className="container px-4 mx-auto py-10">
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">All Users</h2>
 
