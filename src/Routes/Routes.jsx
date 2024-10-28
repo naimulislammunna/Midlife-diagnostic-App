@@ -15,6 +15,7 @@ import AdminDashboardLayout from "../LayOut/AdminDashboardLayout";
 import AddTest from "../Pages/AdminDashboard/AddTest";
 import TotalTests from "../Pages/AdminDashboard/TotalTests";
 import Reservation from "../Pages/AdminDashboard/Reservation";
+import AdminRoutes from "./AdminRoutes";
 
 const router = createBrowserRouter([
     {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <MyProfile></MyProfile>
+                element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
             },
             {
                 path: 'my-appointments',
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/admin-dashboard',
-        element: <AdminDashboardLayout/>,
+        element: <AdminRoutes><AdminDashboardLayout/></AdminRoutes>,
         children: [
             {
                 index: true,

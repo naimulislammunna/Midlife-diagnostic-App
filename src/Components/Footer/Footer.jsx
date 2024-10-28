@@ -2,6 +2,7 @@
 import {CgFacebook} from "react-icons/cg";
 import {BsInstagram, BsLinkedin, BsTwitter} from "react-icons/bs";
 import {SlArrowUp} from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -9,13 +10,12 @@ const Footer = () => {
 
             <div
                 className="w-full flex items-center justify-center pt-[30px] flex-col gap-[20px] pb-[130px]">
-                <img src="https://i.ibb.co/ZHYQ04D/footer-logo.png" alt="logo"
-                     className="w-[150px]"/>
-
-                <p className="text-[0.9rem] text-center sm:text-start text-gray-600">High level
-                    experience in web design and development knowledge, producing quality work.
-                </p>
-
+                <div className="flex">
+                        <Link to='/'>
+                            <a className="logo text-4xl text-mySky">Mid<span className="text-myBlue logo">Life</span></a>
+                            <p className="text-myBlue text-center font-semibold">Diagnostic</p>
+                        </Link>
+                    </div>
                 <button className="py-3 px-6 rounded-full bg-primary text-white">Contact Us</button>
 
                 <div className="flex gap-[15px] text-black mt-4">

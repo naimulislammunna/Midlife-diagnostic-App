@@ -6,7 +6,7 @@ import User from "./User";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data, isLoading , refetch} = useQuery({
+    const { data =[], isLoading , refetch} = useQuery({
         queryKey: [''],
         queryFn: async () => {
             const response = await axiosSecure.get('/users');
@@ -16,6 +16,7 @@ const AllUsers = () => {
     })
 
     if (isLoading) return <Loading />
+
     return (
         <>
             <section className="container px-4 mx-auto py-10">

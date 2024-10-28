@@ -5,10 +5,10 @@ import { UserContext } from "../../Provider/UserProvider";
 const AdminSidebar = () => {
     const { data } = useContext(UserContext);
     const items = <>
-        <NavLink to='/admin-dashboard' end className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>All Users</button></NavLink>
-        <NavLink to='add-test' className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Add Test</button></NavLink>
-        <NavLink to='all-test' className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>All Test</button></NavLink>
-        <NavLink to='reservation' className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Reservation</button></NavLink>
+        <NavLink to='/admin-dashboard' end className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>All Users</button></NavLink>
+        <NavLink to='add-test' className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Add Test</button></NavLink>
+        <NavLink to='all-test' className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>All Test</button></NavLink>
+        <NavLink to='reservation' className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Reservation</button></NavLink>
     </>
 
     return (
@@ -33,6 +33,9 @@ const AdminSidebar = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-3">
                     {items}
+                    <div className="text-center">
+                    <Link to='/'><button className=" bg-myBlue px-4 py-2 rounded-xl text-white">Back Home</button></Link>
+                    </div>
                 </ul>
             </div>
             <div className="hidden sm:flex sm:flex-col justify-between bg-myBlue text-white min-h-screen w-52 py-5">

@@ -3,22 +3,24 @@ import { AuthContext } from "../Auth/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "react-query";
 import Loading from "../Components/Loader/Loading";
-// import Loading from "../Components/Loader/Loading";
 
 export const UserContext = createContext();
 const UserProvider = ({children}) => {
     const {userInfo} = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
+    
 
-    const {data, isLoading} = useQuery({
-        queryKey: ["users"],
+    const {data , isLoading}= useQuery({
+        queryKey:[userInfo?.email],
         queryFn: async () =>{
             const response = await axiosSecure.get(`/user?email=${userInfo?.email}`)
             return response;
         }
     })
 
-    if(isLoading) return <Loading/>
+    if(isLoading) return <Loading p={'UP'}/>
+    
+
 
     return (
         <UserContext.Provider value={data}>

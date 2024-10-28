@@ -29,7 +29,7 @@ const Hero = () => {
             <div className="w-full lg:w-1/2 flex justify-end items-center">
                 <div className="relative">
                     <img className="w-[75%] ml-20" src="https://i.postimg.cc/76gdy8Zj/mri.png" alt="" />
-                    <img className="w-1/2  absolute top-8 bottom-0 right-10" src="https://i.postimg.cc/pVJ4GH7F/beautiful-young-female-doctor-looking-camera-office.png" alt="" />
+                    <img className="w-1/2  absolute lg:top-8 bottom-0 right-10" src="https://i.postimg.cc/pVJ4GH7F/beautiful-young-female-doctor-looking-camera-office.png" alt="" />
                 </div>
             </div>
         </div>

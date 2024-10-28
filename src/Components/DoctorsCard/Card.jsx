@@ -1,7 +1,7 @@
 
 const Card = ({name, img, position}) => {
     return (
-        <div className="flex max-w-[350px] flex-col items-center justify-center space-y-4 rounded-xl bg-teal-100/50  p-8 shadow-lg dark:bg-[#18181B]">
+        <div className="flex max-w-[350px] flex-col items-center justify-center space-y-4 rounded-xl bg-teal-100/50  p-8 shadow-lg dark:bg-[#18181B] mx-auto">
             <div className="group relative">
                 <img width={180} height={180} className="h-[180px] w-[180px] rounded-full bg-slate-500 object-cover border-4 border-mySky" src={img} alt="card navigate ui" />
             </div>

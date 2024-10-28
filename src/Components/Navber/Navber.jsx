@@ -1,22 +1,34 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Navber = () => {
-    const {userInfo,  logOut} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { userInfo, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
-        logOut();
+        logOut()
+            .then(() => {
+                toast.success('Log Out')
+                navigate('/')
+            })
     }
 
 
     const items = <>
         <NavLink to='/'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Home</button></NavLink>
         <NavLink to='/all-tests'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">All Tests</button></NavLink>
-        <NavLink to='/user-dashboard'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">My Dashboard</button></NavLink>
+        {
+            userInfo?.email && <NavLink to='/user-dashboard'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">My Dashboard</button></NavLink>
+        }
     </>
     return (
-        <div className="bg-white flex"> 
+        <div className="bg-white flex">
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <div className="navbar container flex justify-between">
                 <div>
                     <div className="dropdown">
@@ -40,7 +52,7 @@ const Navber = () => {
                             {items}
                         </ul>
                     </div>
-                    <div className="flex">
+                    <div className="flex ml-5 lg:ml-0">
                         <Link to='/'>
                             <a className="logo text-4xl text-mySky">Mid<span className="text-myBlue logo">Life</span></a>
                             <p className="text-myBlue text-center font-semibold">Diagnostic</p>
@@ -56,10 +68,10 @@ const Navber = () => {
                     {
                         userInfo?.email || <Link to='/register'>
                             <button className="button">Register</button>
-                        </Link> 
+                        </Link>
                     }
-                    
-                    {userInfo && <div className="dropdown dropdown-end">
+
+                    {userInfo?.email && <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img
@@ -74,9 +86,8 @@ const Navber = () => {
                             <li>
                                 {userInfo?.displayName}
                             </li>
-                            <li className="my-3"><Link to='/dashboard'>Dashboard</Link></li>
-                            <li className="my-3"><Link to='/admin-dashboard'>Admin-dashboard</Link></li>
-                            <li>{userInfo && <button onClick={handleLogOut} className="px-4 py-2 rounded-full bg-white">Sign Out</button>}</li>
+                            <li className="my-1"><Link to='/admin-dashboard'><button className="px-4 py-2 rounded-full">Admin-dashboard</button></Link></li>
+                            <li>{userInfo && <button onClick={handleLogOut} className="my-1 px-4 py-2 rounded-full bg-white">Sign Out</button>}</li>
                         </ul>
                     </div>}
                 </div>

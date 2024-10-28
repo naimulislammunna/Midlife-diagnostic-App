@@ -16,7 +16,9 @@ const TestDetails = () => {
     const axiosSecure = useAxiosSecure();
 
     const bookInfo = {
+        name: userInfo?.displayName,
         email: userInfo.email,
+        userPhoto: userInfo?.photoURL,
         title: test.title,
         date: test.date,
         image: test.image,
@@ -43,13 +45,13 @@ const TestDetails = () => {
     const stripePromise = loadStripe(import.meta.env.VITE_Stripe_Api_Key);
 
     return (
-        <div className="p-20">
+        <div className="p-5 lg:p-20">
             <Toaster
                 position="top-center"
                 reverseOrder={false}
             />
-            <div className="card card-side bg-base-100 shadow-xl">
-                <figure className="w-1/2">
+            <div className="card rounded-none card-side flex flex-col lg:flex-row bg-base-100 shadow-xl">
+                <figure className="w-full lg:w-1/2">
                     <div>
                         <img
                             src={test?.image}
@@ -74,7 +76,7 @@ const TestDetails = () => {
                     position="top-center"
                     reverseOrder={false}
                 />
-                <div className="modal-box max-w-[60%] max-h-[90%] p-10">
+                <div className="modal-box lg:max-w-[60%] lg:max-h-[90%] lg:p-10">
                     <form method="dialog" className="text-end">
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn">Close</button>

@@ -11,8 +11,6 @@ const TestResult = () => {
         queryKey: ['booking'],
         queryFn: async () => {
             const response = await axiosSecure.get(`/booking?email=${userInfo?.email}`);
-            console.log(response);
-
             return response.data;
         }
     })

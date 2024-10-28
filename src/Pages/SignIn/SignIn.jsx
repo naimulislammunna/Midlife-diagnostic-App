@@ -1,21 +1,31 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
-    const {handleSignIn} = useContext(AuthContext);
-    const {register, handleSubmit} = useForm();
-    
+    const { handleSignIn } = useContext(AuthContext);
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const onSubmit = (data) => {
-        const {email, password} = data;
+        const { email, password } = data;
         handleSignIn(email, password)
-        .then(res => console.log(res)
-        )
+            .then(() => {
+                toast.success('Sign In Successfully')
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(err => toast.error(err.message.split('/')[1]))
 
     }
     return (
         <div className="my-5">
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-cyan-700 dark:bg-cyan-900  shadow-cyan-500/50">
                 <h1 className="text-3xl font-semibold text-cyan-600">Sign In</h1>
 

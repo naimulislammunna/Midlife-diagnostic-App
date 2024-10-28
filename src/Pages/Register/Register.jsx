@@ -8,7 +8,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
-    const { handleRegister } = useContext(AuthContext);
+    const { handleRegister, updateUserProfile } = useContext(AuthContext);
     const [districts, setDistricts] = useState([]);
     const [upozilas, setUpozilas] = useState([]);
     const bloods = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
@@ -48,6 +48,7 @@ const Register = () => {
                             "content-type": "multipart/form-data"
                         }
                     })
+                    updateUserProfile(name, response.data.data.display_url)
                     const user = {
                         name,
                         email,

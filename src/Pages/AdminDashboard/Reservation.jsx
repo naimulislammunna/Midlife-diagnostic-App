@@ -46,11 +46,11 @@ const Reservation = () => {
 
     if (loading) return <Loading />
     return (<>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto text-myBlue bg-teal-100/50 px-5">
             <table className="table">
                 {/* head */}
                 <thead>
-                    <tr>
+                    <tr className="text-lg font-bold text-myBlue">
                         <th>Patient</th>
                         <th>Test Details</th>
                         <th>Price</th>
@@ -67,24 +67,24 @@ const Reservation = () => {
                                         <div className="avatar">
                                             <div className="mask mask-squircle h-12 w-12">
                                                 <img
-                                                    src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                                                    src={test?.userPhoto}
                                                     alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
                                         <div>
-                                            <div className="font-bold">Hart Hagerty</div>
+                                            <div className="font-bold">{test?.name}</div>
                                             <div className="text-sm opacity-50">{test?.email}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td className="text-sm font-bold text-myBlue">
                                     {test?.title}
                                     <br />
                                     <span className="badge badge-ghost badge-sm">{test?.date}</span>
                                 </td>
                                 <td>$ {test?.price}</td>
                                 <th>
-                                    <button onClick={() => { document.getElementById('my_modal_1').showModal(); handleAddResult(test._id) }} className="btn btn-ghost btn-xs">Add Result</button>
+                                    <button onClick={() => { document.getElementById('my_modal_1').showModal(); handleAddResult(test._id) }} className="bg-myBlue text-sm font-semibold px-4 py-2 rounded-full text-white">Add Result</button>
                                 </th>
                             </tr>)
                     }

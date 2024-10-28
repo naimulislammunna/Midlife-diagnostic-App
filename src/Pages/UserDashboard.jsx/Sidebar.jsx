@@ -5,11 +5,11 @@ import { UserContext } from "../../Provider/UserProvider";
 const Sidebar = () => {
     const { data } = useContext(UserContext);
     const items = <>
-        <NavLink to='/user-dashboard' end className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Profile</button></NavLink>
+        <NavLink to='/user-dashboard' end className={({ isActive }) => isActive ?  'text-myBlue bg-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Profile</button></NavLink>
 
-        <NavLink to='my-appointments' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Appointments</button></NavLink>
+        <NavLink to='my-appointments' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>My Appointments</button></NavLink>
 
-        <NavLink to='test-results' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Test results</button></NavLink>
+        <NavLink to='test-results' className={({ isActive }) => isActive ? 'text-myBlue text-sm bg-white px-4 py-2 font-semibold text-center w-[80%] ml-12' : 'lg:text-white text-sm px-4 py-2 font-semibold text-center w-[80%] ml-12'}><button>Test results</button></NavLink>
     </>
 
     return (
@@ -34,6 +34,9 @@ const Sidebar = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-3">
                     {items}
+                    <div className="text-center">
+                    <Link to='/'><button className=" bg-myBlue px-4 py-2 rounded-xl text-white">Back Home</button></Link>
+                    </div>
                 </ul>
             </div>
             <div className="hidden sm:flex sm:flex-col justify-between bg-myBlue text-white min-h-screen w-52 py-5">

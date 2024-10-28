@@ -36,7 +36,7 @@ const TotalTests = () => {
                 reverseOrder={false}
             />
             <div className="overflow-x-auto">
-                <h1 className="text-center text-xl font-semibold mt-5">My Appoinments</h1>
+                <h1 className="text-center text-xl font-semibold mt-5">Total Tests</h1>
                 <table className="min-w-[90%] shadow-md border mx-auto border-gray-100 my-6">
                     <thead>
                         <tr className="bg-[#0095FF] text-white">
