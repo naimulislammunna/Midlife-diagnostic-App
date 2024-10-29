@@ -40,8 +40,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/test/:id',
-                element: <TestDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/test/${params.id}`)
+                element: <PrivateRoutes><TestDetails/></PrivateRoutes>,
+                loader: ({params}) => fetch(`https://midlife-diagnostic-server.vercel.app/test/${params.id}`)
             }
         ]
     },

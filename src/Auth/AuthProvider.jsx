@@ -5,7 +5,7 @@ import auth from '../firebase/firebase.config';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [userInfo, setUserInfo] = useState([]);
+    const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const handleRegister = (email, password) => {
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true);
-        setUserInfo([])
+        setUserInfo(null)
         return signOut(auth);
     }
 
