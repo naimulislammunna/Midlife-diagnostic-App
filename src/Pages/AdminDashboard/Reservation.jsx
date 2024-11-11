@@ -8,7 +8,7 @@ import { useState } from "react";
 const Reservation = () => {
     const axiosSecure = useAxiosSecure();
     const [id, setId] = useState();
-    const { data, loading} = useQuery({
+    const { data, isLoading} = useQuery({
         queryKey: ['all-booking'],
         queryFn: async () => {
             const response = await axiosSecure.get(`/all-booking`);
@@ -44,7 +44,7 @@ const Reservation = () => {
 
     }
 
-    if (loading) return <Loading />
+    if (isLoading) return <Loading />
     return (<>
         <div className="overflow-x-auto text-myBlue bg-teal-100/50 px-5">
             <table className="table">

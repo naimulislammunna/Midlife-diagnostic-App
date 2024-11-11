@@ -69,7 +69,6 @@ const User = ({ user, refetch }) => {
     const handleuserInformation = (user) => {
         setUserInformation(user)    
     }
-    console.log('up', userInformation);
     
     return (
         <>

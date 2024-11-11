@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navber = () => {
+    const { data } = useAdmin();
     const navigate = useNavigate();
     const { userInfo, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
@@ -19,9 +21,6 @@ const Navber = () => {
     const items = <>
         <NavLink to='/'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">Home</button></NavLink>
         <NavLink to='/all-tests'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">All Tests</button></NavLink>
-        {
-            userInfo?.email && <NavLink to='/user-dashboard'><button className="text-gray text-lg font-semibold hover:border-b-2 hover:border-mySky">My Dashboard</button></NavLink>
-        }
     </>
     return (
         <div className="bg-white flex">
@@ -83,11 +82,14 @@ const Navber = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li>
-                                {userInfo?.displayName}
+                            <li className="mt-3 ">
+                                <span className="text-myBlue font-semibold text-lg hover:bg-white">{userInfo?.displayName}</span>
                             </li>
-                            <li className="my-1"><Link to='/admin-dashboard'><button className="px-4 py-2 rounded-full">Admin-dashboard</button></Link></li>
-                            <li>{userInfo && <button onClick={handleLogOut} className="my-1 px-4 py-2 rounded-full bg-white">Sign Out</button>}</li>
+                            {
+                                data?.role === 'Admin' ? <li className="my-1"><Link className="px-4 py-2 rounded-full" to='/admin-dashboard'><button>Admin-dashboard</button></Link></li> : <li className="my-1"><Link className="px-4 py-2 rounded-full" to='/user-dashboard'> My Dashboard </Link></li>
+
+                            }
+                            <li>{userInfo && <button className="px-4 py-2 rounded-full" onClick={handleLogOut} >Sign Out</button>}</li>
                         </ul>
                     </div>}
                 </div>

@@ -36,18 +36,18 @@ const router = createBrowserRouter([
             },
             {
                 path: '/all-tests',
-                element: <AllTests/>
+                element: <AllTests />
             },
             {
                 path: '/test/:id',
-                element: <PrivateRoutes><TestDetails/></PrivateRoutes>,
-                loader: ({params}) => fetch(`https://midlife-diagnostic-server.vercel.app/test/${params.id}`)
+                element: <PrivateRoutes><TestDetails /></PrivateRoutes>,
+                loader: ({ params }) => fetch(`https://midlife-diagnostic-server.vercel.app/test/${params.id}`)
             }
         ]
     },
     {
         path: '/user-dashboard',
-        element: <PrivateRoutes><UserDashboardLayout/></PrivateRoutes>,
+        element: <PrivateRoutes><UserDashboardLayout /></PrivateRoutes>,
         children: [
             {
                 index: true,
@@ -55,33 +55,33 @@ const router = createBrowserRouter([
             },
             {
                 path: 'my-appointments',
-                element: <MyAppointment/>
+                element: <MyAppointment />
             },
             {
                 path: 'test-results',
-                element: <TestResult/>
+                element: <TestResult />
             }
         ]
     },
     {
         path: '/admin-dashboard',
-        element: <AdminRoutes><AdminDashboardLayout/></AdminRoutes>,
+        element: <PrivateRoutes><AdminRoutes><AdminDashboardLayout /></AdminRoutes></PrivateRoutes>,
         children: [
             {
                 index: true,
-                element: <AllUsers/>
+                element: <AllUsers />
             },
             {
                 path: 'add-test',
-                element: <AddTest/>
+                element: <AddTest />
             },
             {
                 path: 'all-test',
-                element: <TotalTests/>
+                element: <TotalTests />
             },
             {
                 path: 'reservation',
-                element: <Reservation/>
+                element: <Reservation />
             }
         ]
     }

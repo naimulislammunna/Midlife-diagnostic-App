@@ -10,4 +10,3 @@ const Loading = ({p}) => {
 }
 
 export default Loading;
-

@@ -3,19 +3,21 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import useAdmin from "../../Hooks/useAdmin";
 
 const SignIn = () => {
     const { handleSignIn } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
+    const { data:admin } = useAdmin();
 
     const onSubmit = (data) => {
         const { email, password } = data;
         handleSignIn(email, password)
             .then(() => {
                 toast.success('Sign In Successfully')
-                navigate(location?.state ? location.state : '/')
+                navigate(location?.state ? location.state : `${admin?.role === 'Admin' ? '/admin-dashboard' : '/user-dashboard'}`)
             })
             .catch(err => toast.error(err.message.split('/')[1]))
 

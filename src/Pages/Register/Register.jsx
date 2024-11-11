@@ -18,12 +18,12 @@ const Register = () => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch('../../../public/Districts.json')
+        fetch('./Districts.json')
             .then(res => res.json())
             .then(data => setDistricts(data))
     }, [])
     useEffect(() => {
-        fetch('../../../public/Upazila.json')
+        fetch('./Upazila.json')
             .then(res => res.json())
             .then(data => setUpozilas(data))
     }, [])

@@ -1,32 +1,21 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import Loading from "../Components/Loader/Loading";
-import { useQuery } from "react-query";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAdmin from "../Hooks/useAdmin";
 
 const AdminRoutes = ({children}) => {
-    const axiosSecure = useAxiosSecure();
-    const {userInfo, loading} = useAuth();
-
-    const {data, isLoading} = useQuery({
-        queryKey: ['role'],
-        enabled: !loading && !!userInfo,
-        queryFn: async () =>{
-            const response = await axiosSecure.get(`/admin?email=${userInfo?.email}`);
-            
-            return response.data;
-        },
-        
-    })
-    // console.log("admin routes", role);
+    const {userInfo} = useAuth();
+    const {data , isLoading} = useAdmin();
+    const location = useLocation();
     
-    if(isLoading || loading) return <Loading/>
+    
+    if(isLoading) return <Loading p={'admin route'}/>
 
-    if(data?.role === 'Admin'){
+    if(userInfo && data?.role === 'Admin'){
         return children;
     }
 
-    return <Navigate to='/' replace></Navigate>
+    return <Navigate to='/register' state={location.pathname} replace></Navigate>
 };
 
 export default AdminRoutes;
